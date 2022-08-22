@@ -1,3 +1,6 @@
+const inquirer = require("inquirer");
+
+
 const Employee = require('./employee');
 
 class Intern extends Employee {
@@ -5,7 +8,7 @@ class Intern extends Employee {
         super();
         this.school = school;
     };
-    askForOfficeSchool() {
+    askForSchool() {
         return inquirer
         .prompt([
             {
