@@ -16,6 +16,9 @@ class Engineer extends Employee {
                 message: "Please enter the engineer's GitHub user name.",
             }
         ])
+        .then((answers) => {
+            this.gitHubName = answers.gitHubName;
+        })
     }
 };
 

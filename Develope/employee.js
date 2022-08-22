@@ -27,6 +27,11 @@ askForInfo() {
             message: "Please enter the new employee's email address.",
         }
     ]) 
+    .then((answers) => {
+        this.name = answers.employeeName;
+        this.email = answers.employeeEmail;
+        this.employeeId = answers.employeeId;
+    })
 }
 
 // askForId() {    

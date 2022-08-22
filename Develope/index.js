@@ -6,10 +6,11 @@ const Manager = require("./manager");
 const Engineer = require("./engineer");
 const Inter = require("./intern");
 const Intern = require("./intern");
+const { options } = require("yargs");
 
 const manager = new Manager();
-const engineer = new Engineer();
-const intern = new Intern();
+const engineer = [];
+const intern = [];
 
 function buildTeam() {
   return inquirer
@@ -21,21 +22,43 @@ function buildTeam() {
       choices: ["Engineer", "Intern", "Finish and Save"],
     },
   ])
+  .then((answers) => {
+    if (answers.options === "Engineer") {
+        addEngineer();
+    } else if (answers.options === "Intern") {
+        addIntern();
+    } else if (answers.options === "Finish and Save") {
+        console.log("run print html function");
+        console.log(manager, engineer, intern)
+        
+    }
+
+  });
 }
 
 manager
   .askForInfo()
   .then(() => manager.askForOfficeNumber())
   .then(() => buildTeam())
-  .then(() => addEngineer())
-  .then(() => addIntern());
+
 
 function addEngineer() {
-  engineer.askForInfo().then(() => engineer.askForGitHub());
+    var newEngineer = new Engineer;
+  newEngineer.askForInfo()
+  .then(() => newEngineer.askForGitHub())
+  .then(() => {
+    engineer.push(newEngineer);
+    buildTeam();
+  });
 }
 
 function addIntern() {
-  intern.askForInfo().then(() => intern.askForSchool());
+  var newIntern = new Intern;
+    newIntern.askForInfo().then(() => newIntern.askForSchool())
+  .then(() => {
+    intern.push(newIntern);
+    buildTeam();
+  });
 }
 
 // We need something like this to write to the html --------------

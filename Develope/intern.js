@@ -17,6 +17,9 @@ class Intern extends Employee {
                 message: "Please enter the intern's school name.",
             }
         ])
+        .then((answers) => {
+            this.school = answers.school;
+        })
     }
 };
 

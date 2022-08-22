@@ -16,6 +16,9 @@ class Manager extends Employee {
                 message: "What is the manager's office number?",
             }
         ])
+        .then((answers) => {
+            this.officeNumber = answers.managerOfficeNumber;
+        })
     }
 };
 
