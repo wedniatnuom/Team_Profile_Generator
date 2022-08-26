@@ -1,16 +1,15 @@
 const inquirer = require("inquirer");
 const fs = require("fs");
 
-const Employee = require("./employee");
-const Manager = require("./manager");
-const Engineer = require("./engineer");
-const Inter = require("./intern");
-const Intern = require("./intern");
-const { options } = require("yargs");
+const Manager = require("./tests/manager");
+const Engineer = require("./tests/engineer");
+const Intern = require("./tests/intern");
 
 const manager = new Manager();
 const engineer = [];
 const intern = [];
+let engineerDivs = "";
+let internDivs = "";
 
 function buildTeam() {
   return inquirer
@@ -35,7 +34,6 @@ function buildTeam() {
     })
     .then(() => {
         fs.writeFileSync("index.html", generateTeam())
-            // console.log("Successfully wrote to html")
     })
 }
 
@@ -60,9 +58,6 @@ function addIntern() {
       buildTeam();
     });
 }
-
-let engineerDivs = "";
-let internDivs = "";
 
 function engineerCards() {
   for (let i = 0; i < engineer.length; i++) {
@@ -129,11 +124,7 @@ const generateTeam = () =>
     </body>
     </html>
 `;
-// async function writeDocument() {
-//     await init();
-//     fs.writeFileSync("index.html", generateTeam())
-//             console.log("Successfully wrote to html")
-// }
+
 function init() {
     manager.askForInfo()
       .then(() => manager.askForOfficeNumber())
